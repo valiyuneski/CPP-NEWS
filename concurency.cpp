@@ -28,4 +28,20 @@ private:
     T value_;
 };
 
+safecpp::ts_value<int> counter(0);
+
+int main() {
+    // Write: modify the value
+    counter.write([](int& v) {
+        v += 1;
+    });
+
+    // Read: access the value
+    int value = counter.read([](const int& v) {
+        return v;
+    });
+
+    std::cout << value << "\n"; // 1
+}
+
 } // namespace safecpp
